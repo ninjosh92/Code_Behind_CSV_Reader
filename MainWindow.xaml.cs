@@ -39,12 +39,19 @@ namespace Code_Behind_CSV_Reader
             t.Start();
             
         }
-        private delegate void Updater(int UI);
+        private delegate void Updater(LaunchDataSlice UI);
         private  void displayData()
         {
 
-            
 
+
+            var filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "data.csv");
+            Console.WriteLine(filePath);
+            var streamReader = new StreamReader(filePath);
+            var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+            var records = csvReader.GetRecords<LaunchDataSlice>().ToList();
+
+            
             /**for (int i = 0; i < 10; i++)
             {
 
@@ -53,7 +60,7 @@ namespace Code_Behind_CSV_Reader
                 Dispatcher.BeginInvoke(DispatcherPriority.Send, uiUpdater, i);
                 Thread.Sleep(1000);
             }**/
-            
+
             /**
             foreach (LaunchDataSlice r in records)
             {
@@ -62,20 +69,26 @@ namespace Code_Behind_CSV_Reader
                 Console.WriteLine("Fuel Pressure = {0}, LOX Pressure = {1}, High Press Pressure = {2}", r.Fuel, r.Lox, r.HighPress);
                 System.Threading.Thread.Sleep(1000);
             }**/
-            
-            for (int i = 0; i < 10; i++)
+
+            for (int i = 0; i < 100; i++)
             {
                 LaunchDataSlice dataSlice = records.ElementAt(i);
                 
+
+                
                 Console.WriteLine("Fuel Pressure = {0}, LOX Pressure = {1}, High Press Pressure = {2}", dataSlice.Fuel, dataSlice.Lox, dataSlice.HighPress);
+                Updater uiUpdater = new Updater(UpdateUI);
+                //var fuel_ = dataSlice.Fuel;
+                Dispatcher.BeginInvoke(DispatcherPriority.Send, uiUpdater, dataSlice);
                 System.Threading.Thread.Sleep(1000);
             }
             
         }
 
-        private void UpdateUI(int i)
+        private void UpdateUI(LaunchDataSlice dataSlice)
         {
-            Lox_Label.Content = i;
+            string newContent = string.Format("Fuel Pressure = {0}, LOX Pressure = {1}, High Press Pressure = {2}", dataSlice.Fuel, dataSlice.Lox, dataSlice.HighPress);
+            Lox_Label.Content = newContent;
         }
 
         public class LaunchDataSlice
