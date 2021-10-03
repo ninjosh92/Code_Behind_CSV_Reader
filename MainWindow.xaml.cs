@@ -87,8 +87,21 @@ namespace Code_Behind_CSV_Reader
 
         private void UpdateUI(LaunchDataSlice dataSlice)
         {
-            string newContent = string.Format("Fuel Pressure = {0}, LOX Pressure = {1}, High Press Pressure = {2}", dataSlice.Fuel, dataSlice.Lox, dataSlice.HighPress);
-            Lox_Label.Content = newContent;
+            double fuelReadingDouble = dataSlice.Fuel;
+            double loxReadingDouble = dataSlice.Lox;
+            double highPressReadingDouble = dataSlice.HighPress;
+
+            string fuelReadingString = fuelReadingDouble.ToString();
+            string loxReadingString = loxReadingDouble.ToString();
+            string highPressReadingString = highPressReadingDouble.ToString();
+
+            string fuelContent = string.Format("Fuel Pressure = {0}", fuelReadingString);
+            string loxContent = string.Format("LOX Pressure = {0}", loxReadingString);
+            string highPressContent = string.Format("High Press Pressure = {0}", highPressReadingString);
+
+            Fuel_Label.Content = fuelContent;
+            Lox_Label.Content = loxContent;
+            HighPress_Label.Content = highPressContent;
         }
 
         public class LaunchDataSlice
