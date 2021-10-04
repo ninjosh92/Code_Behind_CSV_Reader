@@ -122,5 +122,11 @@ namespace Code_Behind_CSV_Reader
                 DragMove();
             }
         }
+
+        private void Exit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application curApp = Application.Current;
+            curApp.Shutdown();
+        }
     }
 }
