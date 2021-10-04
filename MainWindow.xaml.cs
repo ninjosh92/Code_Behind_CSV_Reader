@@ -114,5 +114,13 @@ namespace Code_Behind_CSV_Reader
             public Double Fuel { get; set; }
 
         }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
     }
 }

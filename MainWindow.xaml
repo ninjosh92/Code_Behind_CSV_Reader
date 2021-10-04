@@ -23,7 +23,9 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="#0f0f2d" Grid.ColumnSpan="4">
+        <Grid Background="#0f0f2d" 
+              Grid.ColumnSpan="4"
+              MouseDown="Grid_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
@@ -63,18 +65,92 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        FontFamily="Fonts/#Mass Effect Game 123"/>
+            <Button x:Name="Exit_Button" Grid.Column="11" Grid.ColumnSpan="2" Content="Exit"
+                        Foreground="White"
+                        FontSize="14" 
+                        FontFamily="Fonts/#Mass Effect Game 123"
+                        FontWeight="Medium">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" Value="Fonts/#Mass Effect Game 123"/>
+                        <Setter Property="Background" Value="#fe6584"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="AliceBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="65" Height="20"
+                                    CornerRadius="12"
+                                    Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
 
 
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.RowSpan="3" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                
+                <Image Width="40" Height="40"
+                       Source="Images/user.png"/>
+                <TextBlock Text="User_Name"
+                           Foreground="AntiqueWhite"
+                           FontSize="10"
+                           FontFamily="Fonts/#Mass Effect Game 123"
+                           FontWeight="Medium"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Start_Button" Content="Start"
+                        Foreground="White"
+                        FontSize="14" 
+                        FontFamily="Fonts/#Mass Effect Game 123"
+                        FontWeight="Medium">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#Mass Effect Game 123"/>
+                            <Setter Property="Background" Value="#fe6584"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AliceBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+ 
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100" Height="25"
+                                    CornerRadius="12"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
             </StackPanel>
         </StackPanel>
         
-        <Label Grid.Column="1" Grid.Row="1" x:Name="Lox_Label" Content="Lox" Foreground="AntiqueWhite"/>
-        <Label Grid.Column="2" Grid.Row="1" x:Name="HighPress_Label" Content="High Press" Foreground="AntiqueWhite"/>
-        <Label Grid.Column="3" Grid.Row="1" x:Name="Fuel_Label" Content="Fuel" Foreground="AntiqueWhite"/>
+        <Label Grid.Column="1" Grid.Row="3" x:Name="Lox_Label" Content="Lox" Foreground="AntiqueWhite"/>
+        <Label Grid.Column="2" Grid.Row="3" x:Name="HighPress_Label" Content="High Press" Foreground="AntiqueWhite"/>
+        <Label Grid.Column="3" Grid.Row="3" x:Name="Fuel_Label" Content="Fuel" Foreground="AntiqueWhite"/>
+        
+        
+        
     </Grid>
 </Window>
