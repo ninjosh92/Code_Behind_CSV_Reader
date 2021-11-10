@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Code_Behind_CSV_Reader"
+        xmlns:User_Controls="clr-namespace:Code_Behind_CSV_Reader.User_Controls"
         mc:Ignorable="d"
         Title="CSV Reader" Height="450" Width="800"
         ResizeMode="NoResize"
@@ -148,6 +149,13 @@
 
                 </Button>
             </StackPanel>
+            <StackPanel Height="328">
+                <User_Controls:DragMenu Height="300"></User_Controls:DragMenu>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <User_Controls:DropCanvas Height="260"/>
         </StackPanel>
 
         <Label Grid.Column="1" Grid.Row="3" x:Name="Lox_Label" Content="Lox" Foreground="AntiqueWhite"/>
