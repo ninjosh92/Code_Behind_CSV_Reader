@@ -128,5 +128,10 @@ namespace Code_Behind_CSV_Reader
             Application curApp = Application.Current;
             curApp.Shutdown();
         }
+
+        private void DragMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -150,7 +150,7 @@
                 </Button>
             </StackPanel>
             <StackPanel Height="328">
-                <User_Controls:DragMenu Height="300"></User_Controls:DragMenu>
+                <User_Controls:DragMenu Height="300" Loaded="DragMenu_Loaded"></User_Controls:DragMenu>
             </StackPanel>
         </StackPanel>
 

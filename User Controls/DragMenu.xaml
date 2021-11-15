@@ -24,6 +24,18 @@
                 Fill="AliceBlue" 
                 MouseMove="testRectangle_MouseMove"
                 IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=root}"/>
+            <Image
+               x:Name="testImage"
+                Canvas.Left="50"
+                Canvas.Top="125"
+                Width="50"
+                Height="50"
+                Source="G:\git\Code_Behind_CSV_Reader\Images\Tank2.png"
+                MouseMove="testRectangle_MouseMove"
+                IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=root}"/>
+                
+                
+            
         </Canvas>
     </Border>
 </UserControl>

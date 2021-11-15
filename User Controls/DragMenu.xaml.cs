@@ -41,7 +41,7 @@ namespace Code_Behind_CSV_Reader.User_Controls
             if(e.LeftButton == MouseButtonState.Pressed)
             {
                 IsChildHitTestVisible = false; 
-                DragDrop.DoDragDrop(testRectangle, new DataObject(DataFormats.Serializable, testRectangle), DragDropEffects.Move);
+                DragDrop.DoDragDrop(testImage, new DataObject(DataFormats.Serializable, testImage), DragDropEffects.Move);
                 IsChildHitTestVisible = true; 
             }
 
