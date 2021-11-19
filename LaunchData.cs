@@ -82,7 +82,7 @@ namespace Code_Behind_CSV_Reader
         public void saveToFile(List<string> parseData) 
         {
             // saved in bin/debug idk how to change the save location
-            System.IO.File.WriteAllLines("Launch Data stuff.txt", parseData);
+            System.IO.File.WriteAllLines("LaunchData.txt", parseData);
 
         }
 
