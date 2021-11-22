@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Data.Sql;
+using System.Data.SqlClient;
+
 
 namespace Code_Behind_CSV_Reader
 {
     class LaunchData 
     {
+
+        SqlCommand cmd;
+        SqlConnection con;
+        SqlDataAdapter Adaptor;
 
         // this function calls the open file function that returns a string with all the data
         // the func then parses the data and saves it to a list.
@@ -93,12 +100,8 @@ namespace Code_Behind_CSV_Reader
 
         }
 
-        public void saveToSQL() 
-        {
-           
-        }
 
-        // this fucn takes a string that contains the gages name with value. 
+        // this function takes a string that contains the gages name with value. 
         // it gets the float number as a string, converts and returns it as a float
         public float gageValue(string dataLine)
         {
@@ -132,6 +135,71 @@ namespace Code_Behind_CSV_Reader
             return value;
         }
 
-       
-    }
-}
+
+
+        /*func will save the list of gage values to sql table */
+        public void saveToSQL()
+        {
+
+            //I will save into sql a complete instance of all the gage info
+            float Time = -1;
+            float LoxTank = -1;
+            float HighPressureTank =-1;
+            float FuelTank = -1;
+
+
+
+
+
+
+            SqlConnection conn = new SqlConnection("Data source=USER-PC; Database=Emp123;User Id=sa;Password=myPassword");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("insert into <Table Name>values(1,'nagendra',10000);", conn);
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("Inserting Data Successfully");
+            conn.Close();
+
+
+
+            //SqlCommand cmd;
+            //SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\LaunchDB.mdf;Integrated Security=True");
+
+
+
+            //con.Open();
+            //cmd = new SqlCommand("INSERT INTO LaunchData
+            //(Time(s), LOX Tank, High Pressure Tank, Fuel Tank)  
+
+            //VALUES(@Time(s), @LOX Tank, @High Pressure Tank, @Fuel Tank)",con);
+
+            //cmd = new SqlCommand("INSERT INTO LaunchData VALUES('"+ Time + "','"+ LoxTank + "','"+ HighPressureTank + "','"+ FuelTank + "')", con);
+
+
+
+            /*
+            cmd.Parameters.AddWithValue("@Time(s)", Time);
+            cmd.Parameters.AddWithValue("@LOX Tank", LoxTank);
+            cmd.Parameters.AddWithValue("@High Pressure Tank", HighPressureTank);
+            cmd.Parameters.AddWithValue("@Fuel Tank", FuelTank);
+            
+             */
+
+
+
+
+
+
+
+
+
+
+
+
+            Console.WriteLine(  "i fucking hate sql " + (Time+ LoxTank+ HighPressureTank+ FuelTank));
+        }
+
+
+
+    }//end of class
+
+}//end of namespace

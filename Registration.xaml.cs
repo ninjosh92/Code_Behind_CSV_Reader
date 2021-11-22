@@ -83,7 +83,7 @@ namespace Code_Behind_CSV_Reader
                 {
                     errormessage.Text = "";
                     string address = textBoxAddress.Text;
-                    System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection("Data Source=TESTPURU;Initial Catalog=Data;User ID=sa;Password=wintellect");
+                    fg con = new System.Data.SqlClient.SqlConnection("Data Source=TESTPURU;Initial Catalog=Data;User ID=sa;Password=wintellect");
                     con.Open();
                     SqlCommand cmd = new SqlCommand("Insert into Registration (FirstName,LastName,Email,Password,Address) values('" + firstname + "','" + lastname + "','" + email + "','" + password + "','" + address + "')", con);
                     cmd.CommandType = CommandType.Text;

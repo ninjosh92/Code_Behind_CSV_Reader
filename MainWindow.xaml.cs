@@ -37,9 +37,10 @@ namespace Code_Behind_CSV_Reader
             //Thread t = new Thread(new ThreadStart(displayData));
             //t.Start();
 
-            string data = "\"P4 - High Pressure Tank\": \"2980.95\"";
-            LaunchData launchData = new LaunchData();
-            launchData.gageValue(data);
+            
+            LaunchData ld = new LaunchData();
+
+            ld.saveToSQL();
 
             
 
