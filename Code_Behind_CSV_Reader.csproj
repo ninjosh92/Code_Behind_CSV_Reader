@@ -163,6 +163,7 @@
     <Content Include="LaunchDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="LaunchDBTableDefinition.txt" />
     <Content Include="LaunchDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>LaunchDB.mdf</DependentUpon>

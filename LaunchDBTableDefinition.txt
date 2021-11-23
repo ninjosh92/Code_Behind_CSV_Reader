@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[LaunchData] (
+    [id]                 NCHAR (10) DEFAULT ((1)) NOT NULL,
+    [Time]               FLOAT (53) DEFAULT ((0)) NULL,
+    [LOX Tank]           FLOAT (53) DEFAULT ((0)) NULL,
+    [High Pressure Tank] FLOAT (53) DEFAULT ((0)) NULL,
+    [Fuel Tank]          FLOAT (53) DEFAULT ((0)) NULL,
+    PRIMARY KEY CLUSTERED ([id] ASC)
+);
+
