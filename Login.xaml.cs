@@ -45,7 +45,8 @@ namespace Code_Behind_CSV_Reader
             {
                 string email = textBoxEmail.Text;
                 string password = passwordBox1.Password;
-                SqlConnection con = new SqlConnection("Data Source=TESTPURU;Initial Catalog=Data;User ID=sa;Password=wintellect");
+                string cn_String = Properties.Settings.Default.connection_string;
+                SqlConnection con = new SqlConnection(cn_String);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Select * from Registration where Email='" + email + "'  and password='" + password + "'", con);
                 cmd.CommandType = CommandType.Text;
@@ -55,7 +56,7 @@ namespace Code_Behind_CSV_Reader
                 adapter.Fill(dataSet);
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
-                    string username = dataSet.Tables[0].Rows[0]["FirstName"].ToString() + " " + dataSet.Tables[0].Rows[0]["LastName"].ToString(); 
+                    string username = dataSet.Tables[0].Rows[0]["first_name"].ToString() + " " + dataSet.Tables[0].Rows[0]["last_name"].ToString();
                     mainwindow.Show();
                     Close();
                 }
