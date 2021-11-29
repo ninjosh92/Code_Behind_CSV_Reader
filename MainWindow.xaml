@@ -120,7 +120,7 @@
                         Foreground="White"
                         FontSize="14" 
                         FontFamily="Fonts/#Mass Effect Game 123"
-                        FontWeight="Medium">
+                        FontWeight="Medium" Click="Start_Button_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="TextElement.FontFamily" Value="Fonts/#Mass Effect Game 123"/>
