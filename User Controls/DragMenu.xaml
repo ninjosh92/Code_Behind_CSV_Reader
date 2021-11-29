@@ -27,10 +27,6 @@
                 MouseMove="menuItem_MouseMove"
                 />
 
-
-
-
-
         </Canvas>
     </Border>
 </UserControl>

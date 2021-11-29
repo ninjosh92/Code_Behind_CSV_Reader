@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Tank2.png" />
