@@ -39,7 +39,6 @@ namespace Code_Behind_CSV_Reader
 
             
             LaunchData ld = new LaunchData();
-
             ld.saveToSQL();
 
             

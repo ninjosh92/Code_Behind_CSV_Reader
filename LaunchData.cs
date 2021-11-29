@@ -18,6 +18,8 @@ namespace Code_Behind_CSV_Reader
 
         // this function calls the open file function that returns a string with all the data
         // the func then parses the data and saves it to a list.
+        //launch data has a couple instances of info 
+        //launch data 2 has only one instance of info
 
 
 
@@ -26,7 +28,7 @@ namespace Code_Behind_CSV_Reader
 
             List<string> data = new List<string>();
 
-            string filename = @"C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\data2.txt";
+            string filename = @"C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\data.txt";
             using (StreamReader reader = File.OpenText(filename))
             {
 
@@ -99,6 +101,44 @@ namespace Code_Behind_CSV_Reader
         }
 
 
+
+
+
+
+        public string gageNames(string dataLine)
+        {
+
+            string gageName = "";
+            // this bool makes sure that the for loop ignores the numbers in the name of the gages P4 in
+            //case
+
+
+
+            // iterates the string looking for the float 
+            for (int i = 0; i < dataLine.Length; i++)
+            {
+
+
+                if (dataLine.Contains("Time") == true)
+                {
+                    gageName = "Time";
+
+                }
+                else if (dataLine.Contains("PT LOX") == true)
+                {
+                    gageName = "PT LOX";
+                }
+                else if (dataLine.Contains("P4- High Pressure Tank") == true)
+                {
+                    gageName = "High Pressure Tank";
+                }
+
+                
+
+            }
+            return gageName;
+        }
+
         // this function takes a string that contains the gages name with value. 
         // it gets the float number as a string, converts and returns it as a float
         public float gageValue(string dataLine)
@@ -127,6 +167,9 @@ namespace Code_Behind_CSV_Reader
                 
             }
 
+
+            
+
             //converts the string number into a float
             value = float.Parse(gageValues, CultureInfo.InvariantCulture.NumberFormat);
             
@@ -134,18 +177,62 @@ namespace Code_Behind_CSV_Reader
         }
 
 
-
         /*func will save the list of gage values to sql table 
          I have to manually enter a launch ID or else this function wont work. im not sure how to work around 
         that 
          */
+
+        //returns a string with the launch info from the file
+        //launch data has a couple instances of info 
+        //launch data 2 has only one instance of info
+        public string openLaunchData() 
+        {
+
+            //this has the file path from my pc 
+            string text = System.IO.File.ReadAllText(@"C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\bin\Debug\LaunchData.txt");
+
+            return text;
+        }
+        
+        
+        public void saveToTable(float id, float Time, float LoxTank, float HighPressureTank, float FuelTank) 
+        {
+            try
+            {
+
+                SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\LaunchDB.mdf;Integrated Security=True");
+                conn.Open();
+
+                try
+                {
+                    SqlCommand cmdId = new SqlCommand("SELECT MAX (id) +1 FROM LaunchData", conn);
+                    id += (int)cmdId.ExecuteScalar();
+
+                }
+                catch (Exception e) { Console.WriteLine(id); }
+
+                //this code is a work around for the auto generator in sql fig how it works 
+                //SqlCommand cmdId = new SqlCommand("SELECT MAX (id) +1 FROM LaunchData", conn); 
+                //int newID = (int)cmdId.ExecuteScalar();
+
+                //this inserts into table dont change 
+                SqlCommand cmd = new SqlCommand("INSERT INTO [LaunchData] VALUES('" + id + "','" + Time + "','" + LoxTank + "','" + HighPressureTank + "','" + FuelTank + "')", conn);
+
+                cmd.ExecuteNonQuery();
+                //Console.WriteLine("Inserting Data Successfully");
+                conn.Close();
+
+
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+
+        }
+
         public void saveToSQL()
         {
 
-
-            //I will save into sql a complete instance of all the gage info
-
-            //float id = 0;
+            string launchData = openLaunchData();
+            //Console.WriteLine(launchData);
 
             float Time = -1;
             float LoxTank = -1;
@@ -153,97 +240,42 @@ namespace Code_Behind_CSV_Reader
             float FuelTank = -1;
             int id = 0;
 
+            //each loop will save into sql a complete instance of all the gage info
+            using (StringReader reader = new StringReader(launchData))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
 
 
-            try {
+                    if (line.Contains("Time"))
+                    {
+                        Time = gageValue(line);
+                    }
+                    else if (line.Contains("LOX Tank"))
+                    { 
+                        LoxTank = gageValue(line);
+                    }
+                    else if (line.Contains("High Pressure Tank"))
+                    {
+                        HighPressureTank = gageValue(line);
+                    }
+                    else if (line.Contains("Fuel Tank"))
+                    {
+                       FuelTank = gageValue(line);
+                       saveToTable(id, Time, LoxTank, HighPressureTank, FuelTank);
 
-                SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\LaunchDB.mdf;Integrated Security=True");
-                conn.Open();
-
-                try
-                {  
-                    SqlCommand cmdId = new SqlCommand("SELECT MAX (id) +1 FROM LaunchData", conn);
-                    id = (int)cmdId.ExecuteScalar();
-                    Console.WriteLine(id);
-
+                        //i put these here as a check if the data isnt inserted correctly it will show -1
+                        Time = -1;
+                        LoxTank = -1;
+                        HighPressureTank = -1;
+                        FuelTank = -1;
+                    }
                 }
-                catch (Exception e) { Console.WriteLine(id);  }
-
-                    //this code is a work around for the auto generator in sql fig how it works 
-                    //SqlCommand cmdId = new SqlCommand("SELECT MAX (id) +1 FROM LaunchData", conn); 
-                    //int newID = (int)cmdId.ExecuteScalar();
-
-                    //this inserts into table dont change 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO [LaunchData] VALUES('" + id + "','" + Time + "','"+ LoxTank + "','"+ HighPressureTank + "','"+ FuelTank + "')", conn);
-
-              
-
-
-                // SqlCommand cmd = new SqlCommand("INSERT INTO [LaunchData](Time,LOX Tank,High Pressure Tank,Fuel Tank)  VALUES('" + Time + "','"+ LoxTank + "','"+ HighPressureTank + "','"+ FuelTank + "')", conn);
-
-
-
-
-
-
-                //SqlCommand cmd = new SqlCommand("INSERT INTO [LaunchData] (Time,LOX Tank,High Pressure Tank,Fuel Tank) VALUES(@Time (s),@LOX Tank,@High Pressure Tank,@Fuel Tank)", conn);
-                /*
-                cmd.Parameters.AddWithValue("@Time (s)", Time);
-                cmd.Parameters.AddWithValue("@LOX Tank", LoxTank);
-                cmd.Parameters.AddWithValue("@High Pressure Tank", HighPressureTank);
-                cmd.Parameters.AddWithValue("@Fuel Tank", FuelTank);                 
-                */
-
-
-                //var command = new SqlCommand("INSERT INTO [LaunchData](Time,LOX Tank,High Pressure Tank,Fuel Tank)  VALUES('" + Time + "','" + LoxTank + "','" + HighPressureTank + "','" + FuelTank + "')", conn);
-                //command.ExecuteNonQuery();
-
-                cmd.ExecuteNonQuery();
-                Console.WriteLine("Inserting Data Successfully");
-                conn.Close();
-
-
-
-
 
 
             }
-            catch (Exception e) { Console.WriteLine(e) ; }
-
-
-
-
-
-            //SqlCommand cmd;
-            //SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC1\source\repos\Code_Behind_CSV_Reader\LaunchDB.mdf;Integrated Security=True");
-
-
-
-            //con.Open();
-            //cmd = new SqlCommand("INSERT INTO LaunchData (Time(s), LOX Tank, High Pressure Tank, Fuel Tank)VALUES(@Time(s), @LOX Tank, @High Pressure Tank, @Fuel Tank)",con);
-
-            //cmd = new SqlCommand("INSERT INTO LaunchData VALUES('"+ Time + "','"+ LoxTank + "','"+ HighPressureTank + "','"+ FuelTank + "')", con);
-
-
-
-            /*
-            cmd.Parameters.AddWithValue("@Time(s)", Time);
-            cmd.Parameters.AddWithValue("@LOX Tank", LoxTank);
-            cmd.Parameters.AddWithValue("@High Pressure Tank", HighPressureTank);
-            cmd.Parameters.AddWithValue("@Fuel Tank", FuelTank);
             
-             */
-
-
-
-
-
-
-
-
-
-
-
 
             Console.WriteLine(  "i hate sql " + (Time+ LoxTank+ HighPressureTank+ FuelTank));
         }
