@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 
-
 using CsvHelper;
 using System.IO;
 using System.Globalization;
@@ -35,8 +34,16 @@ namespace Code_Behind_CSV_Reader
         {
             InitializeComponent();
 
-            Thread t = new Thread(new ThreadStart(displayData));
-            t.Start();
+            //Thread t = new Thread(new ThreadStart(displayData));
+            //t.Start();
+
+            
+            LaunchData ld = new LaunchData();
+            ld.saveToSQL();
+
+            
+
+
             
         }
         private delegate void Updater(LaunchDataSlice UI);
