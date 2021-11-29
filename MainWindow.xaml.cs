@@ -35,8 +35,8 @@ namespace Code_Behind_CSV_Reader
         {
             InitializeComponent();
 
-            Thread t = new Thread(new ThreadStart(displayData));
-            t.Start();
+            //Thread t = new Thread(new ThreadStart(displayData));
+            //t.Start();
             
         }
         private delegate void Updater(LaunchDataSlice UI);
@@ -87,6 +87,7 @@ namespace Code_Behind_CSV_Reader
 
         private void UpdateUI(LaunchDataSlice dataSlice)
         {
+            Console.WriteLine("Hello! This is a test!");
             double fuelReadingDouble = dataSlice.Fuel;
             double loxReadingDouble = dataSlice.Lox;
             double highPressReadingDouble = dataSlice.HighPress;
@@ -127,6 +128,12 @@ namespace Code_Behind_CSV_Reader
         {
             Application curApp = Application.Current;
             curApp.Shutdown();
+        }
+
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(displayData));
+            t.Start();
         }
     }
 }

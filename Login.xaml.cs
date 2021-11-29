@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
+using Code_Behind_CSV_Reader;
 
 namespace Code_Behind_CSV_Reader
 {
@@ -25,6 +26,7 @@ namespace Code_Behind_CSV_Reader
         public Login()
         {
             InitializeComponent();
+            
         }
         Registration registration = new Registration();
         MainWindow mainwindow = new MainWindow();
