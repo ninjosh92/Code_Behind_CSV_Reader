@@ -25,6 +25,7 @@ namespace Code_Behind_CSV_Reader
         public Registration()
         {
             InitializeComponent();
+            
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
@@ -47,6 +48,7 @@ namespace Code_Behind_CSV_Reader
         }
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            /**
             if (textBoxEmail.Text.Length == 0)
             {
                 errormessage.Text = "Enter an email.";
@@ -93,8 +95,10 @@ namespace Code_Behind_CSV_Reader
                     con.Close();
                     errormessage.Text = "You have Registered successfully.";
                     Reset();
+            
                 }
             }
+            **/
         }
     }
 }
