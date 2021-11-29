@@ -6,11 +6,14 @@
              xmlns:local="clr-namespace:Code_Behind_CSV_Reader.User_Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border>
+    <Border BorderBrush="AliceBlue"
+            BorderThickness="2">
         <Canvas
             x:Name="dropCanvas" 
+            AllowDrop="True"
             Background="Transparent"
-            AllowDrop="True" 
+            DragLeave="dropCanvas_DragLeave"
+            DragOver="dropCanvas_DragOver"
             Drop="dropCanvas_Drop" >
 
         </Canvas>

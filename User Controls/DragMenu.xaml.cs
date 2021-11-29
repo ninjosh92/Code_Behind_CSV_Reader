@@ -27,8 +27,10 @@ namespace Code_Behind_CSV_Reader.User_Controls
 
         public bool IsChildHitTestVisible
         {
+
             get { return (bool)GetValue(IsChildHitTestVisibleProperty); }
             set { SetValue(IsChildHitTestVisibleProperty, value); }
+
         }
 
         public DragMenu()
@@ -36,7 +38,7 @@ namespace Code_Behind_CSV_Reader.User_Controls
             InitializeComponent();
         }
 
-        private void testRectangle_MouseMove(object sender, MouseEventArgs e)
+        private void menuItem_MouseMove(object sender, MouseEventArgs e)
         {
             if(e.LeftButton == MouseButtonState.Pressed)
             {
@@ -57,6 +59,11 @@ namespace Code_Behind_CSV_Reader.User_Controls
             }
         }
 
+        private void dragCanvas_Drop(object sender, DragEventArgs e)
+        {
+
+        }
+
         private void dragCanvas_DragOver(object sender, DragEventArgs e)
         {
             object data = e.Data.GetData(DataFormats.Serializable);
@@ -73,13 +80,9 @@ namespace Code_Behind_CSV_Reader.User_Controls
                     dragCanvas.Children.Add(element);
                 }
 
-               
             }
         }
 
-        private void dragCanvas_Drop(object sender, DragEventArgs e)
-        {
 
-        }
     }
 }

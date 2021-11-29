@@ -15,27 +15,22 @@
             DragLeave="dragCanvas_DragLeave"
             Drop="dragCanvas_Drop"
             Background="Transparent">
-            <Rectangle
-                x:Name="testRectangle"
-                Canvas.Left="50"
-                Canvas.Top="50"
-                Width="50"
-                Height="50"
-                Fill="AliceBlue" 
-                MouseMove="testRectangle_MouseMove"
-                IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=root}"/>
+
             <Image
                x:Name="testImage"
+                IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=root}"
                 Canvas.Left="50"
-                Canvas.Top="125"
+                Canvas.Top="56"
                 Width="50"
                 Height="50"
-                Source="G:\git\Code_Behind_CSV_Reader\Images\Tank2.png"
-                MouseMove="testRectangle_MouseMove"
-                IsHitTestVisible="{Binding IsChildHitTestVisible, ElementName=root}"/>
-                
-                
-            
+                Source="/Images/Tank1.png"
+                MouseMove="menuItem_MouseMove"
+                />
+
+
+
+
+
         </Canvas>
     </Border>
 </UserControl>
