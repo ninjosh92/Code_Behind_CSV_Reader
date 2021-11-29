@@ -87,6 +87,7 @@ namespace Code_Behind_CSV_Reader
 
         private void UpdateUI(LaunchDataSlice dataSlice)
         {
+            Console.WriteLine("Hello! This is a test!");
             double fuelReadingDouble = dataSlice.Fuel;
             double loxReadingDouble = dataSlice.Lox;
             double highPressReadingDouble = dataSlice.HighPress;
