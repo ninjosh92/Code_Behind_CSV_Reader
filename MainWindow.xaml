@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Code_Behind_CSV_Reader"
         mc:Ignorable="d"
-        Title="CSV Reader" Height="450" Width="800"
+        Title="CSV Reader" 
+        Height="450" 
+        Width="800"
         ResizeMode="NoResize"
         Background="#181735">
     <Grid>
@@ -49,22 +51,6 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        FontFamily="Fonts/#Mass Effect Game 123"/>
-            <TextBlock Text="Menu"
-                       Margin="5"
-                       Grid.ColumnSpan="3"
-                       Foreground="LightGray"
-                       Grid.Column="3"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       FontFamily="Fonts/#Mass Effect Game 123"/>
-            <TextBlock Text="Website"
-                       Margin="5"
-                       Grid.ColumnSpan="3"
-                       Foreground="LightGray"
-                       Grid.Column="4"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       FontFamily="Fonts/#Mass Effect Game 123"/>
             <Button x:Name="Exit_Button" 
                     Click="Exit_Button_Click"
                     Grid.Column="11" 
@@ -105,18 +91,10 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.RowSpan="3" Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="40" Height="40"
-                       Source="Images/user.png"/>
-                <TextBlock Text="User_Name"
-                           Foreground="AntiqueWhite"
-                           FontSize="10"
-                           FontFamily="Fonts/#Mass Effect Game 123"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"/>
-            </StackPanel>
+            <StackPanel Orientation="Horizontal"/>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="Start_Button" Content="Start"
+                        Click="Start_Button_Click"
                         Foreground="White"
                         FontSize="14" 
                         FontFamily="Fonts/#Mass Effect Game 123"
@@ -148,13 +126,170 @@
 
                 </Button>
             </StackPanel>
+
         </StackPanel>
 
         <Label Grid.Column="1" Grid.Row="3" x:Name="Lox_Label" Content="Lox" Foreground="AntiqueWhite"/>
         <Label Grid.Column="2" Grid.Row="3" x:Name="HighPress_Label" Content="High Press" Foreground="AntiqueWhite"/>
         <Label Grid.Column="3" Grid.Row="3" x:Name="Fuel_Label" Content="Fuel" Foreground="AntiqueWhite"/>
 
+        <Canvas 
+            x:Name="squareCanvas"
+            AllowDrop="True" 
+            Background="#181735"
+            Opacity="1"
+            DragOver="Square_Canvas_DragOver"
+            Margin="0,32,0,0" Grid.ColumnSpan="4" Grid.Row="1"
+            >
+            <Rectangle
+                x:Name="greySquare"
+                Canvas.Left="30"
+                Canvas.Top="21"
+                Width="50"
+                Height="50"
+                Fill="Gray"
+                MouseMove="GreySquare_MouseMove"
+                 />
+            <Rectangle
+                x:Name="greySquare_Copy"
+                Canvas.Left="30"
+                Canvas.Top="21"
+                Width="50"
+                Height="50"
+                Fill="Gray"
+                MouseMove="GreySquare_MouseMove"
+                 />
 
+        </Canvas>
+        <Button x:Name="Abort_Button" 
+            Click="Abort_Button_Click" 
+            Content="Abort"
+                Opacity="0"
+            Foreground="White"
+            FontSize="14" 
+            FontFamily="Fonts/#Mass Effect Game 123"
+            FontWeight="Medium" Margin="163,2,168,105" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Mass Effect Game 123"/>
+                    <Setter Property="Background" Value="#fe6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="65" Height="20"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+        <Button x:Name="Launch_Button" Content="Launch"
+            Click="Launch_Button_Click"
+            Opacity="0"
+            Foreground="White"
+            FontSize="14" 
+            FontFamily="Fonts/#Mass Effect Game 123"
+            FontWeight="Medium" Margin="100,0,198,107" Grid.ColumnSpan="2" Grid.Row="1">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Mass Effect Game 123"/>
+                    <Setter Property="Background" Value="#fe6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="100" Height="25"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+        <Canvas 
+            x:Name="rectCanvas"
+            AllowDrop="True" 
+            Background="#181735"
+            Opacity="1"
+            DragOver="Rect_Canvas_DragOver" Grid.ColumnSpan="4" Grid.Row="2"
+            >
+            <Rectangle
+                x:Name="greyRectange"
+                Canvas.Left="44"
+                Canvas.Right="10"
+                Canvas.Bottom="10"
+                Canvas.Top="10"
+                Width="20"
+                Height="46"
+                Fill="Gray"
+                MouseMove="greyRectange_MouseMove" RenderTransformOrigin="0.45,0.007"
+                 />
+            <Rectangle
+                x:Name="greyRectange_Copy"
+                Canvas.Left="44"
+                Canvas.Right="10"
+                Canvas.Bottom="10"
+                Canvas.Top="10"
+                Width="20"
+                Height="46"
+                Fill="Gray"
+                MouseMove="greyRectange_MouseMove" RenderTransformOrigin="0.45,0.007"
+                 />
+        </Canvas>
+        <Canvas 
+            x:Name="ellipseCanvas"
+            AllowDrop="True" 
+            Background="#181735"
+            Opacity="1"
+            DragOver="Ellip_Canvas_DragOver"
+            Margin="0,73,0,0" Grid.ColumnSpan="4" Grid.Row="2"
+            >
+            <Ellipse
+                x:Name="greyEllipse"
+                Canvas.Left="28"
+                Canvas.Right="10"
+                Canvas.Bottom="10"
+                Canvas.Top="9"
+                Width="50"
+                Height="50"
+                Fill="Gray"
+                MouseMove="greyEllipse_MouseMove" RenderTransformOrigin="1.15,0.6"
+                 />
+            <Ellipse
+                x:Name="greyEllipse_Copy"
+                Canvas.Left="28"
+                Canvas.Right="10"
+                Canvas.Bottom="10"
+                Canvas.Top="9"
+                Width="50"
+                Height="50"
+                Fill="Gray"
+                MouseMove="greyEllipse_MouseMove" RenderTransformOrigin="1.15,0.6"
+                 />
+        </Canvas>
 
     </Grid>
+
 </Window>
