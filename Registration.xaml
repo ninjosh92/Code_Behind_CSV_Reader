@@ -41,11 +41,12 @@
             <TextBox Height="23" HorizontalAlignment="Left" Margin="183,0,0,75" Name="textBoxAddress" VerticalAlignment="Bottom" Width="222" />
             <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="183,204,0,0" Name="Submit" VerticalAlignment="Top" Width="70" Click="Submit_Click" />
             <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="259,204,0,0" Name="button2" VerticalAlignment="Top" Width="70" Click="button2_Click" />
-            <Button Content="Cancel" 
+            <Button 
+                    Content="Cancel" 
                     Height="23" 
                     HorizontalAlignment="Right" 
                     Margin="0,204,60,0" 
-                    Name="button3" 
+                    Name="Canel_Button" 
                     VerticalAlignment="Top" 
                     Width="70" 
                     Click="buttonCancel_Click" />

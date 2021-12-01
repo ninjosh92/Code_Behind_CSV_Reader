@@ -92,6 +92,7 @@ namespace Code_Behind_CSV_Reader
                     cmd_Connection.ExecuteNonQuery();
                     con.Close();
                     errormessage.Text = "You have Registered successfully.";
+                    Canel_Button.Content = "Return";
                     Reset();
                 }
             }
